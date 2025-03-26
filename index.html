@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryzealautochess</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- หน้า Intro -->
+  <div id="intro-screen">
+    <video id="intro-video" autoplay muted>
+      <source src="y2meta.net_1080p60-tft-12-chibi-prestige-cafe-cuties-gwen-finisher.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <button id="skip-btn" onclick="skipIntro()">Skip Intro</button>
+  </div>
+
+  <!-- เนื้อหาหลัก -->
+  <div id="main-content">
+    
+    <!-- พื้นหลังวิดีโอ -->
+    <div class="video-container">
+      <video id="bgVideo" autoplay loop muted>
+        <source src="y2meta.net_1080p-gwen-login-screen-animated-league-of-legends.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+
+    <!-- เมนูนำทาง -->
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('comp')">Comp</a></li>
+        <li><a href="#" onclick="showPage('item')">Item</a></li>
+        <li><a href="#" onclick="showPage('champions')">Champions</a></li>
+        <li><a href="#" onclick="showPage('vocabulary')">Vocabulary</a></li>
+      </ul>
+    </nav>
+
+    <!-- ชื่อเว็บและข้อความ -->
+    <div id="site-info">
+      <h1>Ryzealautochess</h1>
+      <p>เว็ปนี้เป็นเว็ปที่นำเสนอข้อมูลตัวละคร และ คำศัพท์ในการเล่น TFT</p>
+    </div>
+
+    <!-- หน้าหมวดหมู่ -->
+    <div id="home" class="page">
+      <p>เลือกหมวดหมู่ด้านบนเพื่อดูข้อมูลที่ต้องการ</p>
+
+      <!-- วิดีโอสำหรับ Home -->
+      <div class="video-wrapper">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/FIQDVcuQRgs" 
+          title="Home Video" 
+          frameborder="0" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div id="comp" class="page hidden">
+      <h2>Comp</h2>
+      <p>ชุดทีมแนะนำสำหรับการเล่น TFT:</p>
+      <ul>
+        <li><strong>Comp 1:</strong> Sniper + Vanguard</li>
+        <li><strong>Comp 2:</strong> emissary + sorcerer</li>
+        <li><strong>Comp 3:</strong> heimerdinger + sentinel</li>
+      </ul>
+
+      <!-- วิดีโอสำหรับ Comp -->
+      <div class="video-wrapper">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/Pp2l4swhpbw" 
+          title="Comp Video" 
+          frameborder="0" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div id="item" class="page hidden">
+      <h2>Item</h2>
+      <p>รายการไอเท็มที่ใช้ใน TFT:</p>
+      <ul>
+        <li><strong>Infinity Edge:</strong> เพิ่ม Critical Damage</li>
+        <li><strong>Guinsoo's Rageblade:</strong> ตีเร็วขึ้น 5% ซ้อนทับความเร็วการโจมตี</li>
+        <li><strong>Blue Buff:</strong> ลดคูลดาวน์สกิล</li>
+      </ul>
+      
+      <input type="text" id="search-item" placeholder="ค้นหาไอเท็ม..." onkeyup="filterItems()">
+
+      <!-- ตารางไอเท็ม -->
+      <table class="item-table">
+        <thead>
+          <tr>
+            <th>รูปภาพ</th>
+            <th>ชื่อไอเท็ม</th>
+            <th>ส่วนประกอบ</th>
+            <th>รายละเอียด</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="images/bf_sword.png" alt="B.F. Sword" width="50"></td>
+            <td><strong>B.F. Sword</strong></td>
+            <td>ไม่มี</td>
+            <td>เพิ่มพลังโจมตี +10</td>
+          </tr>
+          <tr>
+            <td><img src="images/recurve-bow.webp" alt="Recurve Bow" width="50"></td>
+            <td><strong>Recurve Bow</strong></td>
+            <td>ไม่มี</td>
+            <td>เพิ่มความเร็วโจมตี +10%</td>
+          </tr>
+          <tr>
+            <td><img src="images/needlessly-large-rod.webp" alt="Needlessly Large Rod" width="50"></td>
+            <td><strong>Needlessly Large Rod</strong></td>
+            <td>ไม่มี</td>
+            <td>เพิ่มพลังความสามารถ +10</td>
+          </tr>
+          <tr>
+            <td><img src="images/tear-of-the-goddess.webp" alt="Tear of the Goddess" width="50"></td>
+            <td><strong>Tear of the Goddess</strong></td>
+            <td>ไม่มี</td>
+            <td>เพิ่มพลังงานเริ่มต้น +15</td>
+          </tr>
+          <tr>
+            <td><img src="images/chain-vest.webp" alt="Chain Vest" width="50"></td>
+            <td><strong>Chain Vest</strong></td>
+            <td>ไม่มี</td>
+            <td>เพิ่มเกราะ +20</td>
+          </tr>
+          <tr>
+            <td><img src="images/negatron-cloak.webp" alt="Negatron Cloak" width="50"></td>
+            <td><strong>Negatron Cloak</strong></td>
+            <td>ไม่มี</td>
+            <td>เพิ่มความต้านทานเวท +20</td>
+          </tr>
+          <tr>
+            <td><img src="images/Giant_s_Belt_item_HD.png" alt="Giant's Belt" width="50"></td>
+            <td><strong>Giant's Belt</strong></td>
+            <td>ไม่มี</td>
+            <td>เพิ่มพลังชีวิต +150</td>
+          </tr>
+          <tr>
+            <td><img src="images/sparring-gloves.webp" alt="Sparring Gloves" width="50"></td>
+            <td><strong>Sparring Gloves</strong></td>
+            <td>ไม่มี</td>
+            <td>เพิ่มโอกาสคริติคอล +10%</td>
+          </tr>
+          <tr>
+            <td><img src="images/InfinityEdge.png" alt="Infinity Edge" width="50"></td>
+            <td><strong>Infinity Edge</strong></td>
+            <td>
+              <img src="images/bf_sword.png" width="30"> B.F. Sword + 
+              <img src="images/sparring-gloves.webp" width="30"> Sparring Gloves
+            </td>
+            <td>เพิ่มความเสียหายคริติคอล และให้พลังโจมตี</td>
+          </tr>
+          <tr>
+            <td><img src="images/GuinsoosRageblade.png" alt="Guinsoo’s Rageblade" width="50"></td>
+            <td><strong>Guinsoo’s Rageblade</strong></td>
+            <td>
+              <img src="images/recurve-bow.webp" width="30"> Recurve Bow + 
+              <img src="images/needlessly-large-rod.webp" width="30"> Needlessly Large Rod
+            </td>
+            <td>เพิ่มความเร็วโจมตีทุกครั้งที่โจมตี</td>
+          </tr>
+          <tr>
+            <td><img src="images/BlueBuff.png" alt="Blue Buff" width="50"></td>
+            <td><strong>Blue Buff</strong></td>
+            <td>
+              <img src="images/tear-of-the-goddess.webp" width="30"> Tear of the Goddess + 
+              <img src="images/tear-of-the-goddess.webp" width="30"> Tear of the Goddess
+            </td>
+            <td>ลดคูลดาวน์และเริ่มการต่อสู้ด้วยมานาเพิ่มเติม</td>
+          </tr>
+          <tr>
+            <td><img src="images/WarmogsArmor.png" alt="Warmog’s Armor" width="50"></td>
+            <td><strong>Warmog’s Armor</strong></td>
+            <td>
+              <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt + 
+              <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt
+            </td>
+            <td>เพิ่มพลังชีวิตสูงสุดจำนวนมาก</td>
+          </tr>
+          <tr>
+            <td><img src="images/BrambleVest.png" alt="Bramble Vest" width="50"></td>
+            <td><strong>Bramble Vest</strong></td>
+            <td>
+              <img src="images/chain-vest.webp" width="30"> Chain Vest + 
+              <img src="images/chain-vest.webp" width="30"> Chain Vest
+            </td>
+            <td>ลดความเสียหายจากคริติคอลและสะท้อนดาเมจบางส่วน</td>
+          </tr>
+          <tr>
+            <td><img src="images/DragonsClaw.png" alt="Dragon’s Claw" width="50"></td>
+            <td><strong>Dragon’s Claw</strong></td>
+            <td>
+              <img src="images/negatron-cloak.webp" width="30"> Negatron Cloak + 
+              <img src="images/negatron-cloak.webp" width="30"> Negatron Cloak
+            </td>
+            <td>ลดความเสียหายจากเวทมนตร์และฟื้นฟูพลังชีวิต</td>
+          </tr>
+          <tr>
+            <td><img src="images/HandofJustice.png" alt="Hand of Justice" width="50"></td>
+            <td><strong>Hand of Justice</strong></td>
+            <td>
+              <img src="images/sparring-gloves.webp" width="30"> Sparring Gloves + 
+              <img src="images/tear-of-the-goddess.webp" width="30"> Tear of the Goddess
+            </td>
+            <td>สุ่มเพิ่มคริติคอลหรือดูดเลือดทุกเทิร์น</td>
+          </tr>
+          <tr>
+            <td><img src="images/ArchangelsStaff.png" alt="Archangel's Staff" width="50"></td>
+            <td><strong>Archangel's Staff</strong></td>
+            <td>
+              <img src="images/needlessly-large-rod.webp" width="30"> Needlessly Large Rod + 
+              <img src="images/tear-of-the-goddess.webp" width="30"> Tear of the Goddess
+            </td>
+            <td>ได้รับพลังเวทเพิ่มขึ้นตามเวลาการต่อสู้</td>
+          </tr>
+          <tr>
+            <td><img src="images/AdaptiveHelm.png" alt="Adaptive Helm" width="50"></td>
+            <td><strong>Adaptive Helm</strong></td>
+            <td>
+              <img src="images/negatron-cloak.webp" width="30"> Negatron Cloak + 
+              <img src="images/tear-of-the-goddess.webp" width="30"> Tear of the Goddess
+            </td>
+            <td>ลดคูลดาวน์เมื่อได้รับความเสียหาย</td>
+          </tr>
+          <tr>
+            <td><img src="images/Bloodthirster.png" alt="Bloodthirster" width="50"></td>
+            <td><strong>Bloodthirster</strong></td>
+            <td>
+              <img src="images/bf_sword.png" width="30"> B.F. Sword + 
+              <img src="images/negatron-cloak.webp" width="30"> Negatron Cloak
+            </td>
+            <td>ดูดเลือดจากการโจมตี และให้โล่เมื่อพลังชีวิตต่ำ</td>
+          </tr>
+          <tr>
+            <td><img src="images/Crownguard.png" alt="Crownguard" width="50"></td>
+            <td><strong>Crownguard</strong></td>
+            <td>
+              <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt + 
+              <img src="images/needlessly-large-rod.webp" width="30"> Needlessly Large Rod
+            </td>
+            <td>ได้รับโล่และเพิ่มพลังโจมตีเมื่อโล่หาย</td>
+          </tr>
+          <tr>
+            <td><img src="images/Deathblade.png" alt="Deathblade" width="50"></td>
+            <td><strong>Deathblade</strong></td>
+            <td>
+              <img src="images/bf_sword.png" width="30"> B.F. Sword + 
+              <img src="images/bf_sword.png" width="30"> B.F. Sword
+            </td>
+            <td>เพิ่มพลังโจมตีเมื่อสังหารศัตรู</td>
+          </tr>
+          <tr>
+            <td><img src="images/EdgeofNight.png" alt="Edge of Night" width="50"></td>
+            <td><strong>Edge of Night</strong></td>
+            <td>
+              <img src="images/bf_sword.png" width="30"> B.F. Sword + 
+              <img src="images/chain-vest.webp" width="30"> Chain Vest
+            </td>
+            <td>หายตัวชั่วคราวเมื่อพลังชีวิตลดลงต่ำ</td>
+          </tr>
+          <tr>
+            <td><img src="images/Evenshroud.png" alt="Evenshroud" width="50"></td>
+            <td><strong>Evenshroud</strong></td>
+            <td>
+              <img src="images/chain-vest.webp" width="30"> Chain Vest + 
+              <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt
+            </td>
+            <td>ทำให้ศัตรูใกล้เคียงได้รับดาเมจเพิ่มขึ้น</td>
+          </tr>
+          <tr>
+            <td><img src="images/GargoyleStoneplate.png" alt="Gargoyle Stoneplate" width="50"></td>
+            <td><strong>Gargoyle Stoneplate</strong></td>
+            <td>
+              <img src="images/chain-vest.webp" width="30"> Chain Vest + 
+              <img src="images/negatron-cloak.webp" width="30"> Negatron Cloak
+            </td>
+            <td>ได้รับเกราะและต้านเวทมากขึ้นเมื่อมีศัตรูใกล้</td>
+          </tr>
+          <!-- Giant Slayer -->
+          <tr>
+            <td><img src="images/GiantSlayer.png" alt="Giant Slayer" width="50"></td>
+            <td><strong>Giant Slayer</strong></td>
+            <td>
+              <img src="images/bf_sword.png" width="30"> B.F. Sword + 
+              <img src="images/recurve-bow.webp" width="30"> Recurve Bow
+            </td>
+            <td>สร้างดาเมจเพิ่มเติมแก่ศัตรูที่มีพลังชีวิตสูง</td>
+          </tr>
+      <!-- Guardbreaker -->
+      <tr>
+        <td><img src="images/Guardbreaker.png" alt="Guardbreaker" width="50"></td>
+        <td><strong>Guardbreaker</strong></td>
+        <td>
+          <img src="images/bf_sword.png" width="30"> B.F. Sword + 
+          <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt
+        </td>
+        <td>สร้างดาเมจเพิ่มเติมแก่ศัตรูที่มีโล่</td>
+      </tr>
+      <!-- Hextech Gunblade -->
+      <tr>
+        <td><img src="images/HextechGunblade.png" alt="Hextech Gunblade" width="50"></td>
+        <td><strong>Hextech Gunblade</strong></td>
+        <td>
+          <img src="images/bf_sword.png" width="30"> B.F. Sword + 
+          <img src="images/needlessly-large-rod.webp" width="30"> Needlessly Large Rod
+        </td>
+        <td>ดูดเลือดจากการสร้างดาเมจทั้งเวทและกายภาพ</td>
+      </tr>
+      <!-- Ionic Spark -->
+      <tr>
+        <td><img src="images/IonicSpark.png" alt="Ionic Spark" width="50"></td>
+        <td><strong>Ionic Spark</strong></td>
+        <td>
+          <img src="images/negatron-cloak.webp" width="30"> Negatron Cloak + 
+          <img src="images/needlessly-large-rod.webp" width="30"> Needlessly Large Rod
+        </td>
+        <td>ลดต้านทานเวทของศัตรูและทำดาเมจเมื่อใช้สกิล</td>
+      </tr>
+      <!-- Jeweled Gauntlet -->
+      <tr>
+        <td><img src="images/JeweledGauntlet.png" alt="Jeweled Gauntlet" width="50"></td>
+        <td><strong>Jeweled Gauntlet</strong></td>
+        <td>
+          <img src="images/needlessly-large-rod.webp" width="30"> Needlessly Large Rod + 
+          <img src="images/sparring-gloves.webp" width="30"> Sparring Gloves
+        </td>
+        <td>ทำให้สกิลสามารถติดคริติคอลได้</td>
+      </tr>
+      <!-- Last Whisper -->
+      <tr>
+        <td><img src="images/LastWhisper.png" alt="Last Whisper" width="50"></td>
+        <td><strong>Last Whisper</strong></td>
+        <td>
+          <img src="images/recurve-bow.webp" width="30"> Recurve Bow + 
+          <img src="images/sparring-gloves.webp" width="30"> Sparring Gloves
+        </td>
+        <td>ลดเกราะของศัตรูเมื่อโจมตีคริติคอล</td>
+      </tr>
+      <!-- Morellonomicon -->
+      <tr>
+        <td><img src="images/Morellonomicon.png" alt="Morellonomicon" width="50"></td>
+        <td><strong>Morellonomicon</strong></td>
+        <td>
+          <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt + 
+          <img src="images/needlessly-large-rod.webp" width="30"> Needlessly Large Rod
+        </td>
+        <td>ทำให้ศัตรูติดเผาไหม้และลดการฟื้นฟู</td>
+      </tr>
+      <!-- Nashor's Tooth -->
+      <tr>
+        <td><img src="images/NashorsTooth.png" alt="Nashor's Tooth" width="50"></td>
+        <td><strong>Nashor's Tooth</strong></td>
+        <td>
+          <img src="images/recurve-bow.webp" width="30"> Recurve Bow + 
+          <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt
+        </td>
+        <td>เพิ่มความเร็วโจมตี และให้พลังเวทเพิ่มเติม</td>
+      </tr>
+      <!-- Protector's Vow -->
+      <tr>
+        <td><img src="images/ProtectorsVow.png" alt="Protector's Vow" width="50"></td>
+        <td><strong>Protector's Vow</strong></td>
+        <td>
+          <img src="images/chain-vest.webp" width="30"> Chain Vest + 
+          <img src="images/tear-of-the-goddess.webp" width="30"> Tear of the Goddess
+        </td>
+        <td>ให้โล่และเพิ่มความเร็วโจมตีเมื่อได้รับดาเมจ</td>
+      </tr>
+      <!-- Quicksilver -->
+      <tr>
+        <td><img src="images/Quicksilver.png" alt="Quicksilver" width="50"></td>
+        <td><strong>Quicksilver</strong></td>
+        <td>
+          <img src="images/sparring-gloves.webp" width="30"> Sparring Gloves + 
+          <img src="images/negatron-cloak.webp" width="30"> Negatron Cloak
+        </td>
+        <td>ทำให้ผู้สวมใส่ต้านทานการควบคุมฝูงชน</td>
+      </tr>
+      <!-- Rabadon's Deathcap -->
+      <tr>
+        <td><img src="images/RabadonsDeathcap.png" alt="Rabadon's Deathcap" width="50"></td>
+        <td><strong>Rabadon's Deathcap</strong></td>
+        <td>
+          <img src="images/needlessly-large-rod.webp" width="30"> Needlessly Large Rod + 
+          <img src="images/needlessly-large-rod.webp" width="30"> Needlessly Large Rod
+        </td>
+        <td>เพิ่มพลังเวทอย่างมาก</td>
+      </tr>
+      <!-- Red Buff -->
+      <tr>
+        <td><img src="images/RedBuff.png" alt="Red Buff" width="50"></td>
+        <td><strong>Red Buff</strong></td>
+        <td>
+          <img src="images/recurve-bow.webp" width="30"> Recurve Bow + 
+          <img src="images/recurve-bow.webp" width="30"> Recurve Bow
+        </td>
+        <td>ทำให้ศัตรูติดสถานะเผาไหม้และลดการฟื้นฟู</td>
+      </tr>
+      <!-- Redemption -->
+      <tr>
+        <td><img src="images/Redemption.png" alt="Redemption" width="50"></td>
+        <td><strong>Redemption</strong></td>
+        <td>
+          <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt + 
+          <img src="images/tear-of-the-goddess.webp" width="30"> Tear of the Goddess
+        </td>
+        <td>เมื่อพลังชีวิตต่ำ จะฮีลเพื่อนร่วมทีมรอบตัว</td>
+      </tr>
+      <!-- Runaan's Hurricane -->
+      <tr>
+        <td><img src="images/RunaansHurricane.png" alt="Runaan's Hurricane" width="50"></td>
+        <td><strong>Runaan's Hurricane</strong></td>
+        <td>
+          <img src="images/recurve-bow.webp" width="30"> Recurve Bow + 
+          <img src="images/negatron-cloak.webp" width="30"> Negatron Cloak
+        </td>
+        <td>การโจมตีปกติสามารถโจมตีศัตรูเพิ่มอีก 1 ตัว</td>
+      </tr>
+      <!-- Spear of Shojin -->
+      <tr>
+        <td><img src="images/SpearofShojin.png" alt="Spear of Shojin" width="50"></td>
+        <td><strong>Spear of Shojin</strong></td>
+        <td>
+          <img src="images/bf_sword.png" width="30"> B.F. Sword + 
+          <img src="images/tear-of-the-goddess.webp" width="30"> Tear of the Goddess
+        </td>
+        <td>ฟื้นฟูมานาเร็วขึ้นจากการโจมตี</td>
+      </tr>
+      <!-- Statikk Shiv -->
+      <tr>
+        <td><img src="images/StatikkShiv.png" alt="Statikk Shiv" width="50"></td>
+        <td><strong>Statikk Shiv</strong></td>
+        <td>
+          <img src="images/recurve-bow.webp" width="30"> Recurve Bow + 
+          <img src="images/tear-of-the-goddess.webp" width="30"> Tear of the Goddess
+        </td>
+        <td>ปล่อยสายฟ้าช็อตศัตรูหลายตัวเมื่อโจมตี</td>
+      </tr>
+      <!-- Steadfast Heart -->
+      <tr>
+        <td><img src="images/SteadfastHeart.png" alt="Steadfast Heart" width="50"></td>
+        <td><strong>Steadfast Heart</strong></td>
+        <td>
+          <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt + 
+          <img src="images/sparring-gloves.webp" width="30"> Sparring Gloves
+        </td>
+        <td>ให้เกราะป้องกันและต้านทานคริติคอล</td>
+      </tr>
+      <!-- Sterak's Gage -->
+      <tr>
+        <td><img src="images/SteraksGage.png" alt="Sterak's Gage" width="50"></td>
+        <td><strong>Sterak's Gage</strong></td>
+        <td>
+          <img src="images/bf_sword.png" width="30"> B.F. Sword + 
+          <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt
+        </td>
+        <td>ให้โล่ขนาดใหญ่เมื่อได้รับดาเมจรุนแรง</td>
+      </tr>
+      <!-- Sunfire Cape -->
+      <tr>
+        <td><img src="images/SunfireCape.png" alt="Sunfire Cape" width="50"></td>
+        <td><strong>Sunfire Cape</strong></td>
+        <td>
+          <img src="images/Giant_s_Belt_item_HD.png" width="30"> Giant’s Belt + 
+          <img src="images/chain-vest.webp" width="30"> Chain Vest
+        </td>
+        <td>ทำให้ศัตรูรอบข้างติดสถานะเผาไหม้</td>
+      </tr>
+      <!-- Tactician's Cape -->
+      <tr>
+        <td><img src="images/TacticiansCape.png" alt="Tactician's Cape" width="50"></td>
+        <td><strong>Tactician's Cape</strong></td>
+        <td>
+          <img src="images/spatula.png" width="30"> Spatula + 
+          <img src="images/FryingPan.png" width="30"> FryingPan
+        </td>
+        <td>เพิ่มขนาดทีมสูงสุด +1</td>
+      </tr>
+      <!-- Tactician's Crown -->
+      <tr>
+        <td><img src="images/TacticiansCrown.png" alt="Tactician's Crown" width="50"></td>
+        <td><strong>Tactician's Crown</strong></td>
+        <td>
+          <img src="images/spatula.png" width="30"> Spatula + 
+          <img src="images/spatula.png" width="30"> Spatula
+        </td>
+        <td>ให้ขนาดทีมสูงสุด +1 และมอบโบนัสพิเศษ</td>
+      </tr>
+      <!-- Tactician's Shield -->
+      <tr>
+        <td><img src="images/TacticiansShield.png" alt="Tactician's Shield" width="50"></td>
+        <td><strong>Tactician's Shield</strong></td>
+        <td>
+          <img src="images/FryingPan.png" width="30"> FryingPan + 
+          <img src="images/FryingPan.png" width="30"> FryingPan
+        </td>
+        <td>ให้เกราะและต้านเวทแก่ทีม</td>
+      </tr>
+      <!-- Thief's Gloves -->
+      <tr>
+        <td><img src="images/ThiefsGloves.png" alt="Thief's Gloves" width="50"></td>
+        <td><strong>Thief's Gloves</strong></td>
+        <td>
+          <img src="images/sparring-gloves.webp" width="30"> Sparring Gloves + 
+          <img src="images/sparring-gloves.webp" width="30"> Sparring Gloves
+        </td>
+        <td>ได้รับไอเท็มสุ่ม 2 ชิ้นทุกเทิร์น</td>
+      </tr>
+      <!-- Titan's Resolve -->
+      <tr>
+        <td><img src="images/TitansResolve.png" alt="Titan's Resolve" width="50"></td>
+        <td><strong>Titan's Resolve</strong></td>
+        <td>
+          <img src="images/recurve-bow.webp" width="30"> Recurve Bow + 
+          <img src="images/chain-vest.webp" width="30"> Chain Vest
+        </td>
+        <td>เพิ่มพลังโจมตีและเกราะเมื่อโจมตี</td>
+      </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="item-table"> 
+        <!-- ตารางไอเท็ม -->
+      </table>
+    </div>    
+
+    <div id="champions" class="page hidden">
+      <h2>Champions</h2>
+      <p>รายชื่อตัวละครที่แนะนำ:</p>
+      <ul>
+        <li><strong>viktor:</strong> เมจที่มีดาเมจสูงและCCที่ดี</li>
+        <li><strong>Sett:</strong> แทงค์แนวหน้าแข็งแกร่ง</li>
+        <li><strong>warwick:</strong> สุดยอดตัวละครที่สามารถพากลับมาชนะได้</li>
+      </ul>
+
+      <!-- ปุ่มไปยังลิงก์ Mobalytics -->
+  <div class="mobalytics-link">
+    <p>ดูข้อมูลตัวละครเพิ่มเติมได้ที่:</p>
+    <a href="https://mobalytics.gg/tft/champions" target="_blank" class="mobalytics-btn">
+      ไปยัง Mobalytics TFT Champions
+    </a>
+  </div>
+<!-- ปุ่มไปยัง Google Sheets -->
+<div class="google-sheets-link">
+  <p>ดูข้อมูลสเปรดชีตตัวละครได้ที่:</p>
+  <a href="https://docs.google.com/spreadsheets/d/1uYFfaVVqtCHdx7y7Y-44LGJyxu4B7eeRFvXzfC1wUh0/edit?gid=0#gid=0" 
+     target="_blank" class="google-sheets-btn">
+    ไปยัง Google Sheets Champions
+  </a>
+</div>
+
+
+</div>
+
+    <div id="vocabulary" class="page hidden">
+      <h2>Vocabulary</h2>
+      <p>ศัพท์ที่ใช้บ่อยใน TFT:</p>
+      <ul>
+        <li><strong>Econ:</strong> การบริหารเงินในเกม</li>
+        <li><strong>Roll Down:</strong> การใช้เงินทั้งหมดเพื่อตามหาตัวละครที่ต้องการ</li>
+        <li><strong>Hyper Roll:</strong> การหมุนเงินอย่างรวดเร็วเพื่ออัพเกรดตัวละคร</li>
+      </ul>
+
+      <!-- วิดีโอสำหรับ Vocabulary -->
+      <div class="video-wrapper">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/hO_pfQ-yeLE?start=170" 
+          title="Vocabulary Video" 
+          frameborder="0" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  
+  <div id="main-content">
+    <!-- เนื้อหาหลักของเว็บ -->
+  </div>
+
+  <!-- ย้ายข่าวไปอยู่ล่างสุด -->
+  <div class="news-section">
+    <h2>Latest TFT News</h2>
+    <iframe src="https://www.leagueoflegends.com/en-us/news/tags/teamfight-tactics/" 
+      width="100%" height="600px"></iframe>
+  </div>
+
+</body>
+</html>
