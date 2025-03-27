@@ -355,7 +355,7 @@ body {
 }
 
 .site-logo {
-  height: 120px;  /* ปรับความสูงของโลโก้ */
+  height: 60px;  /* ปรับความสูงของโลโก้ */
   width: auto;    /* ให้กว้างตามสัดส่วนเดิม */
   position: absolute;
   top: 10px;
